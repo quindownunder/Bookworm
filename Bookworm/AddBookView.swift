@@ -22,6 +22,10 @@ struct AddBookView: View {
     
     let genres = ["Fantasy", "Horror", "Kids", "Mystery", "Poetry", "Romance", "Thriller"]
     
+    var disableForm: Bool {
+        self.genre == ""
+    }
+    
     var body: some View {
         NavigationView {
             Form {
@@ -55,8 +59,10 @@ struct AddBookView: View {
                         self.presentationMode.wrappedValue.dismiss()
                     }
                 }
+                .disabled(disableForm)
             }
             .navigationBarTitle("Add Book")
+            
         }
     }
 }
