@@ -39,6 +39,8 @@ struct DetailView: View {
                 
                 Text(self.book.review ?? "No review")
                 
+                Text(formattedDate())
+                
                 RatingView(rating: .constant(Int(self.book.rating)))
                     .font(.largeTitle)
                 
@@ -62,6 +64,16 @@ struct DetailView: View {
     func deleteBook() {
         moc.delete(book)
         presentationMode.wrappedValue.dismiss()
+    }
+    
+    func formattedDate() -> String {
+        if let date = self.book.date {
+            let formatter = DateFormatter()
+            formatter.dateStyle = .long
+            return formatter.string(from: date)
+        } else {
+            return "N/A"
+        }
     }
 }
 
